@@ -2,22 +2,85 @@
 
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+import useAuth from "@/hooks/useAuth";
 
 export default function RegisterPage() {
+  const { registerUser, googleLogin } =
+    useAuth();
 
-  const handleRegister = async (e) => {
+  const router = useRouter();
+
+  const handleRegister = async (
+    e
+  ) => {
     e.preventDefault();
 
     const form = e.target;
 
     const name = form.name.value;
     const email = form.email.value;
-    const password = form.password.value;
+    const password =
+      form.password.value;
 
-    console.log(name, email, password);
+    if (password.length < 6) {
+      return Swal.fire({
+        icon: "error",
+        title:
+          "Password must be at least 6 characters",
+      });
+    }
 
-    // Firebase Register Here
+    try {
+      await registerUser(
+        email,
+        password
+      );
+
+      Swal.fire({
+        icon: "success",
+        title:
+          "Registration Successful",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      form.reset();
+
+      router.push("/");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title:
+          error.message,
+      });
+    }
   };
+
+  const handleGoogleLogin =
+    async () => {
+      try {
+        await googleLogin();
+
+        Swal.fire({
+          icon: "success",
+          title:
+            "Login Successful",
+          timer: 1500,
+          showConfirmButton:
+            false,
+        });
+
+        router.push("/");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title:
+            error.message,
+        });
+      }
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
@@ -31,11 +94,13 @@ export default function RegisterPage() {
           </h1>
 
           <p className="text-center text-base-content/70">
-            Join CourseHub today
+            Join HeroKids today
           </p>
 
           <form
-            onSubmit={handleRegister}
+            onSubmit={
+              handleRegister
+            }
             className="space-y-4 mt-5"
           >
 
@@ -69,13 +134,22 @@ export default function RegisterPage() {
 
           </form>
 
-          <button className="btn btn-outline w-full mt-4">
-            <FcGoogle size={24} />
+          <button
+            onClick={
+              handleGoogleLogin
+            }
+            className="btn btn-outline w-full mt-4"
+          >
+            <FcGoogle
+              size={24}
+            />
             Continue With Google
           </button>
 
           <p className="text-center mt-5">
-            Already have an account?
+            Already have an
+            account?
+
             <Link
               href="/login"
               className="text-primary ml-2 font-semibold"

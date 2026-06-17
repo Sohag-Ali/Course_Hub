@@ -2,19 +2,69 @@
 
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
+
+const { loginUser, googleLogin } = useAuth();
+
+const router = useRouter();
+
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const form = e.target;
+  const form = e.target;
 
-    const email = form.email.value;
-    const password = form.password.value;
+  const email = form.email.value;
+  const password = form.password.value;
 
-    console.log(email, password);
+  try {
+    await loginUser(
+      email,
+      password
+    );
 
-    // Firebase Login Here
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    router.push("/");
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: error.message,
+    });
+  }
+};
+
+const handleGoogleLogin =
+  async () => {
+    try {
+      await googleLogin();
+
+      Swal.fire({
+        icon: "success",
+        title:
+          "Google Login Successful",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      router.push("/");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title:
+          "Google Login Failed",
+        text: error.message,
+      });
+    }
   };
 
   return (
@@ -59,7 +109,10 @@ export default function LoginPage() {
 
           </form>
 
-          <button className="btn btn-outline w-full mt-4">
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-outline w-full mt-4"
+          >
             <FcGoogle size={24} />
             Continue With Google
           </button>

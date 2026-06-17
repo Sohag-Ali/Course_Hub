@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import useAuth from "@/hooks/useAuth";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user, logoutUser } = useAuth();
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -29,6 +32,14 @@ export default function Navbar() {
       </Link>
     </li>
   ));
+
+  const handleLogout = async () => {
+  try {
+    await logoutUser();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <header className="sticky top-0 z-50 bg-base-100/90 backdrop-blur-md border-b border-base-300">
@@ -67,21 +78,79 @@ export default function Navbar() {
         </div>
 
         {/* Right */}
-        <div className="navbar-end gap-2">
-          <Link
-            href="/login"
-            className="btn btn-outline btn-primary hidden sm:flex"
-          >
-            Login
-          </Link>
-
-          <Link
-            href="/register"
-            className="btn btn-primary"
-          >
-            Register
-          </Link>
+       <div className="navbar-end gap-2">
+  {user ? (
+    <div className="dropdown dropdown-end">
+      <div
+        tabIndex={0}
+        role="button"
+        className="btn btn-ghost btn-circle avatar"
+      >
+        <div className="w-10 rounded-full">
+          <img
+            src={
+              user.photoURL ||
+              "https://i.ibb.co/4pDNDk1/avatar.png"
+            }
+            alt="user"
+          />
         </div>
+      </div>
+
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-56"
+      >
+        <li className="font-bold px-2 py-1">
+          {user.displayName ||
+            "User"}
+        </li>
+
+        <li className="text-xs opacity-70 px-2">
+          {user.email}
+        </li>
+
+        <div className="divider my-1"></div>
+
+        <li>
+          <Link href="/items/add">
+            Add Course
+          </Link>
+        </li>
+
+        <li>
+          <Link href="/items/manage">
+            Manage Courses
+          </Link>
+        </li>
+
+        <li>
+          <button
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  ) : (
+    <>
+      <Link
+        href="/login"
+        className="btn btn-outline btn-primary hidden sm:flex"
+      >
+        Login
+      </Link>
+
+      <Link
+        href="/register"
+        className="btn btn-primary"
+      >
+        Register
+      </Link>
+    </>
+  )}
+</div>
       </div>
     </header>
   );

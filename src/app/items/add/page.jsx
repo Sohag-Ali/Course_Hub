@@ -1,5 +1,6 @@
 "use client";
 
+import PrivateRoute from "@/components/PrivateRoute";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
@@ -80,7 +81,8 @@ export default function AddCoursePage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <PrivateRoute>
+        <div className="max-w-4xl mx-auto px-4 py-12">
 
       <div className="text-center mb-10">
 
@@ -295,5 +297,6 @@ export default function AddCoursePage() {
       </div>
 
     </div>
+    </PrivateRoute>
   );
 }

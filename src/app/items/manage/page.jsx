@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import PrivateRoute from "@/components/PrivateRoute";
 
 export default function ManageItemsPage() {
   const [courses, setCourses] = useState([]);
@@ -81,7 +82,8 @@ export default function ManageItemsPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+   <PrivateRoute>
+     <div className="max-w-7xl mx-auto px-4 py-10">
       {/* Header */}
 
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-10">
@@ -283,5 +285,6 @@ export default function ManageItemsPage() {
         </>
       )}
     </div>
+   </PrivateRoute>
   );
 }
