@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/loading";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -33,7 +34,7 @@ export default function PrivateRoute({
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
+        <Loading></Loading>
       </div>
     );
   }

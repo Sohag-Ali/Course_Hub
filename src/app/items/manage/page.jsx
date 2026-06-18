@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import PrivateRoute from "@/components/PrivateRoute";
+import Loading from "@/app/loading";
 
 export default function ManageItemsPage() {
   const [courses, setCourses] = useState([]);
@@ -75,9 +76,7 @@ export default function ManageItemsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
+      <Loading></Loading>
     );
   }
 

@@ -8,6 +8,9 @@ export default function AddCoursePage() {
   const [loading, setLoading] =
     useState(false);
 
+  const [imagePreview, setImagePreview] =
+    useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,6 +69,7 @@ export default function AddCoursePage() {
         });
 
         form.reset();
+        setImagePreview("");
       }
     } catch (error) {
       console.log(error);
@@ -82,221 +86,310 @@ export default function AddCoursePage() {
 
   return (
     <PrivateRoute>
-        <div className="max-w-4xl mx-auto px-4 py-12">
 
-      <div className="text-center mb-10">
+      <div className="relative py-16 overflow-hidden">
 
-        <h1 className="text-4xl md:text-5xl font-bold">
-          Add New Course
-        </h1>
+        {/* Background Glow */}
 
-        <p className="mt-4 text-base-content/70">
-          Create and publish a
-          new course for learners.
-        </p>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 blur-3xl rounded-full"></div>
 
-      </div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 blur-3xl rounded-full"></div>
 
-      <div className="card bg-base-100 shadow-xl">
+        <div className="relative z-10 max-w-5xl mx-auto px-4">
 
-        <div className="card-body">
+          {/* Header */}
 
-          <form
-            onSubmit={
-              handleSubmit
-            }
-            className="space-y-6"
-          >
+          <div className="text-center mb-12">
 
-            {/* Title */}
-
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Course Title
-                </span>
-              </label>
-
-              <input
-                type="text"
-                name="title"
-                required
-                placeholder="Enter course title"
-                className="input input-bordered w-full"
-              />
+            <div className="badge badge-primary badge-lg mb-4">
+              🚀 Create New Course
             </div>
 
-            {/* Short Description */}
+            <h1 className="text-4xl md:text-5xl font-bold">
+              Add New Course
+            </h1>
 
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Short Description
-                </span>
-              </label>
+            <p className="mt-4 text-base-content/70 max-w-2xl mx-auto">
+              Share your knowledge with thousands
+              of learners and build an engaging
+              learning experience.
+            </p>
 
-              <textarea
-                name="shortDescription"
-                required
-                rows="3"
-                className="textarea textarea-bordered w-full"
-                placeholder="Short course description"
-              ></textarea>
-            </div>
+          </div>
 
-            {/* Full Description */}
+          {/* Form Card */}
 
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Full Description
-                </span>
-              </label>
+          <div className="card bg-base-100 shadow-2xl border border-base-300 rounded-3xl">
 
-              <textarea
-                name="fullDescription"
-                required
-                rows="6"
-                className="textarea textarea-bordered w-full"
-                placeholder="Detailed course description"
-              ></textarea>
-            </div>
+            <div className="card-body p-8">
 
-            {/* Category + Level */}
+              <form
+                onSubmit={
+                  handleSubmit
+                }
+                className="space-y-6"
+              >
 
-            <div className="grid md:grid-cols-2 gap-5">
+                {/* Title */}
 
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">
-                    Category
-                  </span>
-                </label>
+                <div>
 
-                <select
-                  name="category"
-                  required
-                  className="select select-bordered w-full"
+                  <label className="label">
+                    <span className="font-semibold">
+                      Course Title
+                    </span>
+                  </label>
+
+                  <input
+                    type="text"
+                    name="title"
+                    required
+                    placeholder="Enter course title"
+                    className="input input-bordered w-full"
+                  />
+
+                </div>
+
+                {/* Short Description */}
+
+                <div>
+
+                  <label className="label">
+                    <span className="font-semibold">
+                      Short Description
+                    </span>
+                  </label>
+
+                  <textarea
+                    name="shortDescription"
+                    rows="3"
+                    required
+                    placeholder="Brief description"
+                    className="textarea textarea-bordered w-full"
+                  ></textarea>
+
+                </div>
+
+                {/* Full Description */}
+
+                <div>
+
+                  <label className="label">
+                    <span className="font-semibold">
+                      Full Description
+                    </span>
+                  </label>
+
+                  <textarea
+                    name="fullDescription"
+                    rows="6"
+                    required
+                    placeholder="Detailed course description"
+                    className="textarea textarea-bordered w-full"
+                  ></textarea>
+
+                </div>
+
+                {/* Category & Level */}
+
+                <div className="grid md:grid-cols-2 gap-5">
+
+                  <div>
+
+                    <label className="label">
+                      <span className="font-semibold">
+                        Category
+                      </span>
+                    </label>
+
+                    <select
+                      name="category"
+                      required
+                      className="select select-bordered w-full"
+                    >
+                      <option>
+                        Web Development
+                      </option>
+                      <option>
+                        Programming
+                      </option>
+                      <option>
+                        Design
+                      </option>
+                      <option>
+                        Data Science
+                      </option>
+                      <option>
+                        Marketing
+                      </option>
+                    </select>
+
+                  </div>
+
+                  <div>
+
+                    <label className="label">
+                      <span className="font-semibold">
+                        Level
+                      </span>
+                    </label>
+
+                    <select
+                      name="level"
+                      required
+                      className="select select-bordered w-full"
+                    >
+                      <option>
+                        Beginner
+                      </option>
+                      <option>
+                        Intermediate
+                      </option>
+                      <option>
+                        Advanced
+                      </option>
+                    </select>
+
+                  </div>
+
+                </div>
+
+                {/* Duration & Price */}
+
+                <div className="grid md:grid-cols-2 gap-5">
+
+                  <div>
+
+                    <label className="label">
+                      <span className="font-semibold">
+                        Duration
+                      </span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="duration"
+                      required
+                      placeholder="8 Weeks"
+                      className="input input-bordered w-full"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <label className="label">
+                      <span className="font-semibold">
+                        Price
+                      </span>
+                    </label>
+
+                    <input
+                      type="number"
+                      name="price"
+                      required
+                      placeholder="99"
+                      className="input input-bordered w-full"
+                    />
+
+                  </div>
+
+                </div>
+
+                {/* Image URL */}
+
+                <div>
+
+                  <label className="label">
+                    <span className="font-semibold">
+                      Course Image URL
+                    </span>
+                  </label>
+
+                  <input
+                    type="url"
+                    name="image"
+                    required
+                    placeholder="https://..."
+                    onChange={(e) =>
+                      setImagePreview(
+                        e.target.value
+                      )
+                    }
+                    className="input input-bordered w-full"
+                  />
+
+                </div>
+
+                {/* Preview */}
+
+                {imagePreview && (
+                  <div>
+
+                    <p className="font-semibold mb-3">
+                      Image Preview
+                    </p>
+
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-full h-72 object-cover rounded-2xl border"
+                    />
+
+                  </div>
+                )}
+
+                {/* Submit */}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn btn-primary btn-lg w-full"
                 >
-                  <option>
-                    Web Development
-                  </option>
-                  <option>
-                    Programming
-                  </option>
-                  <option>
-                    Design
-                  </option>
-                  <option>
-                    Data Science
-                  </option>
-                  <option>
-                    Marketing
-                  </option>
-                </select>
-              </div>
 
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">
-                    Level
-                  </span>
-                </label>
+                  {loading ? (
+                    <>
+                      <span className="loading loading-spinner loading-sm"></span>
+                      Publishing Course...
+                    </>
+                  ) : (
+                    "🚀 Publish Course"
+                  )}
 
-                <select
-                  name="level"
-                  required
-                  className="select select-bordered w-full"
-                >
-                  <option>
-                    Beginner
-                  </option>
-                  <option>
-                    Intermediate
-                  </option>
-                  <option>
-                    Advanced
-                  </option>
-                </select>
-              </div>
+                </button>
+
+              </form>
 
             </div>
 
-            {/* Duration + Price */}
-
-            <div className="grid md:grid-cols-2 gap-5">
-
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">
-                    Duration
-                  </span>
-                </label>
-
-                <input
-                  type="text"
-                  name="duration"
-                  required
-                  placeholder="8 Weeks"
-                  className="input input-bordered w-full"
-                />
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">
-                    Price
-                  </span>
-                </label>
-
-                <input
-                  type="number"
-                  name="price"
-                  required
-                  placeholder="99"
-                  className="input input-bordered w-full"
-                />
-              </div>
-
-            </div>
-
-            {/* Image URL */}
-
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Image URL
-                </span>
-              </label>
-
-              <input
-                type="url"
-                name="image"
-                required
-                placeholder="https://..."
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            {/* Submit */}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn btn-primary w-full"
-            >
-              {loading
-                ? "Adding..."
-                : "Add Course"}
-            </button>
-
-          </form>
+          </div>
 
         </div>
 
+        {/* Loading Overlay */}
+
+        {loading && (
+          <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+
+            <div className="bg-base-100 p-8 rounded-3xl shadow-2xl text-center">
+
+              <span className="loading loading-spinner loading-lg text-primary"></span>
+
+              <h3 className="text-xl font-bold mt-4">
+                Publishing Course...
+              </h3>
+
+              <p className="text-base-content/60">
+                Please wait a moment
+              </p>
+
+            </div>
+
+          </div>
+        )}
+
       </div>
 
-    </div>
     </PrivateRoute>
   );
 }

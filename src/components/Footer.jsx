@@ -62,9 +62,13 @@ const Footer = () => {
                 Manage Courses
               </Link>
 
-              <a href="#">Privacy Policy</a>
+              <Link href="/privacy-policy">
+                Privacy Policy
+              </Link>
 
-              <a href="#">Terms & Conditions</a>
+              <Link href="/terms">
+                Terms & Conditions
+              </Link>
             </div>
           </div>
 
@@ -75,28 +79,28 @@ const Footer = () => {
             </h3>
 
             <div className="space-y-2 text-sm">
-              <p>Email: support@coursehub.com</p>
-              <p>Phone: +880 1234-567890</p>
+              <p>Email: sohag2879@gmail.com</p>
+              <p>Phone: +880 1728918054</p>
               <p>Dhaka, Bangladesh</p>
             </div>
 
             <div className="flex gap-3 mt-5">
               <a
-                href="#"
+                href="https://www.facebook.com/share/14bkG6xmEha/"
                 className="btn btn-circle btn-sm btn-primary"
               >
                 <FaFacebookF />
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/in/sohag-ali-7b1061284?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 className="btn btn-circle btn-sm btn-primary"
               >
                 <FaLinkedinIn />
               </a>
 
               <a
-                href="#"
+                href="https://github.com/Sohag-Ali"
                 className="btn btn-circle btn-sm btn-primary"
               >
                 <FaGithub />
