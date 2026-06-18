@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import CourseCard from "@/components/CourseCard";
+import CourseSkeleton from "@/components/skeleton/CourseSkeleton";
 
 export default function ItemsPage() {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const [category, setCategory] =
     useState("All");
@@ -19,6 +21,12 @@ export default function ItemsPage() {
     .then((data) => {
       console.log(data);
       setCourses(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setLoading(false);
     });
 }, []);
 
@@ -132,17 +140,20 @@ export default function ItemsPage() {
 
       {/* Course Grid */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        {filteredCourses.map(
-          (course) => (
-            <CourseCard
-              key={course._id}
-              course={course}
-            />
-          )
-        )}
-      </div>
+  {loading
+    ? [...Array(6)].map((_, index) => (
+        <CourseSkeleton key={index} />
+      ))
+    : filteredCourses.map((course) => (
+        <CourseCard
+          key={course._id}
+          course={course}
+        />
+      ))}
+
+</div>
 
       {/* Empty State */}
 
