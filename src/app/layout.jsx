@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Hero Kids",
+  title: "CourseHub - Your Gateway to Knowledge",
   description: "Online Learning Platform",
 };
 
