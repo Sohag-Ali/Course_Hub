@@ -4,7 +4,7 @@ A modern and responsive online learning platform built with Next.js, Firebase Au
 
 ## 🚀 Live Demo
 
-🔗 Live Site: [Add Your Live URL](https://course-hub-tau-ashy.vercel.app/)
+🔗 Live Site: [Live URL](https://course-hub-tau-ashy.vercel.app/)
 
 ## 📌 Project Overview
 
