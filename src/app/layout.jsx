@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Hero from "@/components/home/Hero";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,24 +25,21 @@ export default function RootLayout({
       data-theme="light"
       className={`${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-
+      <body className="min-h-screen flex flex-col">
         <AuthProvider>
-
-          <header className="py-2 md:w-11/12 mx-auto">
+          <header>
             <Navbar />
           </header>
-
-          <main className="flex-1 py-2 md:w-11/12 mx-auto">
-            {children}
+          
+          <main className="flex-1">
+              {children}
+            
           </main>
 
           <footer>
             <Footer />
           </footer>
-
         </AuthProvider>
-
       </body>
     </html>
   );
